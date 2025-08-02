@@ -112,7 +112,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.tds}
                   onChange={(e) => handleInputChange('tds', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[40px]">ppm</span>
               </div>
@@ -126,7 +126,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.temperature}
                   onChange={(e) => handleInputChange('temperature', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[40px]">°C</span>
               </div>
@@ -140,7 +140,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.pumpCapacity}
                   onChange={(e) => handleInputChange('pumpCapacity', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[40px]">LPH</span>
               </div>
@@ -154,7 +154,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.recovery}
                   onChange={(e) => handleInputChange('recovery', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[40px]">%</span>
               </div>
@@ -170,7 +170,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.flow}
                   onChange={(e) => handleInputChange('flow', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[50px]">m³/hr</span>
               </div>
@@ -184,7 +184,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.tankSize}
                   onChange={(e) => handleInputChange('tankSize', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[40px]">ltr</span>
               </div>
@@ -198,7 +198,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.pumpSetting}
                   onChange={(e) => handleInputChange('pumpSetting', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[40px]">%</span>
               </div>
@@ -212,7 +212,7 @@ const TDSCalculator = () => {
                   type="number"
                   value={formData.runningHours}
                   onChange={(e) => handleInputChange('runningHours', e.target.value)}
-                  className="text-right"
+                  className="text-right bg-white text-red-600 font-semibold"
                 />
                 <span className="text-sm text-white min-w-[50px]">hr/day</span>
               </div>
@@ -229,13 +229,8 @@ const TDSCalculator = () => {
             {results && (
               <div className="mt-6 p-4 bg-white/20 rounded-lg">
                 <h3 className="font-semibold mb-2 text-white">Calculation Results:</h3>
-                <div className="space-y-1 text-sm text-white">
-                  <div className="font-medium">{results.adjustedTDS} ppm</div>
-                  <div>Concentration Factor: {results.concentrationFactor}</div>
-                  <div>Concentrated TDS: {results.concentratedTDS} ppm</div>
-                  <div>Dosing Rate: {results.dosingRate} L/hr</div>
-                  <div>Daily Consumption: {results.dailyConsumption} L/day</div>
-                  <div>Tank Duration: {results.tankDuration} days</div>
+                <div className="text-lg font-bold text-white">
+                  {results.adjustedTDS} ppm
                 </div>
               </div>
             )}
