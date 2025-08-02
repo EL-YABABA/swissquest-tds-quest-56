@@ -88,7 +88,7 @@ const TDSCalculator = () => {
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-4 mb-4">
             <img 
-              src="/lovable-uploads/eef60e35-4e45-40ae-950f-f170a82bd6f4.png" 
+              src="/lovable-uploads/6b2f4fcb-ec1e-4ece-ab59-071e32eaf825.png" 
               alt="SwissQuest Logo" 
               className="h-12 w-auto"
             />
@@ -236,7 +236,7 @@ const TDSCalculator = () => {
             )}
 
             <div className="text-center mt-6">
-              <span className="text-2xl font-bold text-swissquest-red">TDS</span>
+              <span className="text-2xl font-bold text-white">TDS</span>
             </div>
           </CardContent>
         </Card>
