@@ -90,7 +90,7 @@ const TDSCalculator = () => {
             <img 
               src="/lovable-uploads/28443e71-ea0c-4af7-816c-2c454fe0d335.png" 
               alt="SwissQuest Logo" 
-              className="h-12 w-auto"
+              className="h-20 w-auto"
             />
           </div>
         </div>
