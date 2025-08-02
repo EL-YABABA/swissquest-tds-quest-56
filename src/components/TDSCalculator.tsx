@@ -88,7 +88,7 @@ const TDSCalculator = () => {
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-4 mb-4">
             <img 
-              src="/lovable-uploads/6b2f4fcb-ec1e-4ece-ab59-071e32eaf825.png" 
+              src="/lovable-uploads/28443e71-ea0c-4af7-816c-2c454fe0d335.png" 
               alt="SwissQuest Logo" 
               className="h-12 w-auto"
             />
@@ -221,7 +221,7 @@ const TDSCalculator = () => {
             <Button 
               onClick={calculateDosing}
               disabled={!validateForm()}
-              className="w-full bg-swissquest-blue hover:bg-swissquest-blue/90 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 text-lg"
+              className="w-full bg-white/20 hover:bg-white/30 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 text-lg"
             >
               CALCULATE
             </Button>
