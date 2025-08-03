@@ -11,8 +11,9 @@ npm install
 ```
 
 ## Step 2: Install Electron Dependencies
+**Important: Use npm (not bun) for Electron dependencies**
 ```bash
-npm install --save-dev electron@latest electron-builder@latest
+npm install --save-dev electron@latest electron-builder@latest wait-on@latest
 ```
 
 ## Step 3: Update package.json Scripts
