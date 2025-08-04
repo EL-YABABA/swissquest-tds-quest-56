@@ -15,13 +15,13 @@ interface FormData {
   tankSize: string;
   pumpSetting: string;
   runningHours: string;
-  // Additional fields for layout (not used in calculation)
-  waterPressure: string;
-  membraneType: string;
-  prefilterType: string;
-  postfilterType: string;
-  systemAge: string;
-  maintenanceDate: string;
+  // Chemical parameters
+  ca: string;
+  mg: string;
+  co3: string;
+  hcoe: string;
+  cl: string;
+  fe: string;
 }
 
 const TDSCalculator = () => {
@@ -34,13 +34,13 @@ const TDSCalculator = () => {
     tankSize: '',
     pumpSetting: '',
     runningHours: '',
-    // Additional fields (not used in calculation)
-    waterPressure: '',
-    membraneType: '',
-    prefilterType: '',
-    postfilterType: '',
-    systemAge: '',
-    maintenanceDate: '',
+    // Chemical parameters
+    ca: '',
+    mg: '',
+    co3: '',
+    hcoe: '',
+    cl: '',
+    fe: '',
   });
 
   const [results, setResults] = useState<any>(null);
@@ -222,7 +222,7 @@ const TDSCalculator = () => {
                 </div>
               </div>
 
-              {/* Right Column - 7 fields */}
+              {/* Right Column - Chemical parameters */}
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="runningHours" className="text-sm font-medium text-white">Plant Running Hour/Day</Label>
@@ -239,86 +239,86 @@ const TDSCalculator = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="waterPressure" className="text-sm font-medium text-white">Water Pressure</Label>
+                  <Label htmlFor="ca" className="text-sm font-medium text-white">Ca (Calcium)</Label>
                   <div className="flex items-center gap-2">
                     <Input
-                      id="waterPressure"
+                      id="ca"
                       type="number"
-                      value={formData.waterPressure}
-                      onChange={(e) => handleInputChange('waterPressure', e.target.value)}
+                      value={formData.ca}
+                      onChange={(e) => handleInputChange('ca', e.target.value)}
                       className="text-right bg-white text-red-600 font-semibold"
                     />
-                    <span className="text-sm text-white min-w-[40px]">bar</span>
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="membraneType" className="text-sm font-medium text-white">Membrane Type</Label>
+                  <Label htmlFor="mg" className="text-sm font-medium text-white">Mg (Magnesium)</Label>
                   <div className="flex items-center gap-2">
                     <Input
-                      id="membraneType"
-                      type="text"
-                      value={formData.membraneType}
-                      onChange={(e) => handleInputChange('membraneType', e.target.value)}
-                      className="text-right bg-white text-red-600 font-semibold"
-                    />
-                    <span className="text-sm text-white min-w-[40px]">-</span>
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="prefilterType" className="text-sm font-medium text-white">Pre-filter Type</Label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      id="prefilterType"
-                      type="text"
-                      value={formData.prefilterType}
-                      onChange={(e) => handleInputChange('prefilterType', e.target.value)}
-                      className="text-right bg-white text-red-600 font-semibold"
-                    />
-                    <span className="text-sm text-white min-w-[40px]">-</span>
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="postfilterType" className="text-sm font-medium text-white">Post-filter Type</Label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      id="postfilterType"
-                      type="text"
-                      value={formData.postfilterType}
-                      onChange={(e) => handleInputChange('postfilterType', e.target.value)}
-                      className="text-right bg-white text-red-600 font-semibold"
-                    />
-                    <span className="text-sm text-white min-w-[40px]">-</span>
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="systemAge" className="text-sm font-medium text-white">System Age</Label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      id="systemAge"
+                      id="mg"
                       type="number"
-                      value={formData.systemAge}
-                      onChange={(e) => handleInputChange('systemAge', e.target.value)}
+                      value={formData.mg}
+                      onChange={(e) => handleInputChange('mg', e.target.value)}
                       className="text-right bg-white text-red-600 font-semibold"
                     />
-                    <span className="text-sm text-white min-w-[50px]">years</span>
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="maintenanceDate" className="text-sm font-medium text-white">Last Maintenance Date</Label>
+                  <Label htmlFor="co3" className="text-sm font-medium text-white">CO₃ (Carbonate)</Label>
                   <div className="flex items-center gap-2">
                     <Input
-                      id="maintenanceDate"
-                      type="date"
-                      value={formData.maintenanceDate}
-                      onChange={(e) => handleInputChange('maintenanceDate', e.target.value)}
+                      id="co3"
+                      type="number"
+                      value={formData.co3}
+                      onChange={(e) => handleInputChange('co3', e.target.value)}
                       className="text-right bg-white text-red-600 font-semibold"
                     />
-                    <span className="text-sm text-white min-w-[40px]">-</span>
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="hcoe" className="text-sm font-medium text-white">HCO₃ (Bicarbonate)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="hcoe"
+                      type="number"
+                      value={formData.hcoe}
+                      onChange={(e) => handleInputChange('hcoe', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="cl" className="text-sm font-medium text-white">Cl (Chloride)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="cl"
+                      type="number"
+                      value={formData.cl}
+                      onChange={(e) => handleInputChange('cl', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="fe" className="text-sm font-medium text-white">Fe (Iron)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="fe"
+                      type="number"
+                      value={formData.fe}
+                      onChange={(e) => handleInputChange('fe', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
                   </div>
                 </div>
               </div>
