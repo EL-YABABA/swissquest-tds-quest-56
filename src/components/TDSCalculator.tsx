@@ -15,6 +15,13 @@ interface FormData {
   tankSize: string;
   pumpSetting: string;
   runningHours: string;
+  // Additional fields for layout (not used in calculation)
+  waterPressure: string;
+  membraneType: string;
+  prefilterType: string;
+  postfilterType: string;
+  systemAge: string;
+  maintenanceDate: string;
 }
 
 const TDSCalculator = () => {
@@ -27,6 +34,13 @@ const TDSCalculator = () => {
     tankSize: '',
     pumpSetting: '',
     runningHours: '',
+    // Additional fields (not used in calculation)
+    waterPressure: '',
+    membraneType: '',
+    prefilterType: '',
+    postfilterType: '',
+    systemAge: '',
+    maintenanceDate: '',
   });
 
   const [results, setResults] = useState<any>(null);
@@ -95,7 +109,7 @@ const TDSCalculator = () => {
           </div>
         </div>
 
-        <Card className="max-w-lg mx-auto backdrop-blur-md border-0 shadow-2xl bg-swissquest-pink-red/90 text-white">
+        <Card className="max-w-6xl mx-auto backdrop-blur-md border-0 shadow-2xl bg-swissquest-pink-red/90 text-white">
           <CardHeader className="text-center pb-4">
             <CardTitle className="flex items-center justify-center gap-2 text-white">
               <span>Dosing Calculation</span>
@@ -103,125 +117,217 @@ const TDSCalculator = () => {
             </CardTitle>
           </CardHeader>
           
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="tds" className="text-sm font-medium text-white">TDS</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="tds"
-                  type="number"
-                  value={formData.tds}
-                  onChange={(e) => handleInputChange('tds', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[40px]">ppm</span>
-              </div>
-            </div>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-2 gap-8">
+              {/* Left Column - 7 fields */}
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="tds" className="text-sm font-medium text-white">TDS</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="tds"
+                      type="number"
+                      value={formData.tds}
+                      onChange={(e) => handleInputChange('tds', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">ppm</span>
+                  </div>
+                </div>
 
-            <div>
-              <Label htmlFor="temperature" className="text-sm font-medium text-white">Temperature of Feed Water</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="temperature"
-                  type="number"
-                  value={formData.temperature}
-                  onChange={(e) => handleInputChange('temperature', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[40px]">°C</span>
-              </div>
-            </div>
+                <div>
+                  <Label htmlFor="temperature" className="text-sm font-medium text-white">Temperature of Feed Water</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="temperature"
+                      type="number"
+                      value={formData.temperature}
+                      onChange={(e) => handleInputChange('temperature', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">°C</span>
+                  </div>
+                </div>
 
-            <div>
-              <Label htmlFor="pumpCapacity" className="text-sm font-medium text-white">Dosing Pump Capacity</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="pumpCapacity"
-                  type="number"
-                  value={formData.pumpCapacity}
-                  onChange={(e) => handleInputChange('pumpCapacity', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[40px]">LPH</span>
-              </div>
-            </div>
+                <div>
+                  <Label htmlFor="pumpCapacity" className="text-sm font-medium text-white">Dosing Pump Capacity</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="pumpCapacity"
+                      type="number"
+                      value={formData.pumpCapacity}
+                      onChange={(e) => handleInputChange('pumpCapacity', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">LPH</span>
+                  </div>
+                </div>
 
-            <div>
-              <Label htmlFor="recovery" className="text-sm font-medium text-white">Recovery</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="recovery"
-                  type="number"
-                  value={formData.recovery}
-                  onChange={(e) => handleInputChange('recovery', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[40px]">%</span>
-              </div>
-            </div>
+                <div>
+                  <Label htmlFor="recovery" className="text-sm font-medium text-white">Recovery</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="recovery"
+                      type="number"
+                      value={formData.recovery}
+                      onChange={(e) => handleInputChange('recovery', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">%</span>
+                  </div>
+                </div>
 
-            <div>
-              <Label htmlFor="flow" className="text-sm font-medium text-white">
-                Flow in m³/hr (1 m³ = 1000 LPH)
-              </Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="flow"
-                  type="number"
-                  value={formData.flow}
-                  onChange={(e) => handleInputChange('flow', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[50px]">m³/hr</span>
-              </div>
-            </div>
+                <div>
+                  <Label htmlFor="flow" className="text-sm font-medium text-white">
+                    Flow in m³/hr (1 m³ = 1000 LPH)
+                  </Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="flow"
+                      type="number"
+                      value={formData.flow}
+                      onChange={(e) => handleInputChange('flow', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[50px]">m³/hr</span>
+                  </div>
+                </div>
 
-            <div>
-              <Label htmlFor="tankSize" className="text-sm font-medium text-white">Dosing Tank Size(Volume) in Litre</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="tankSize"
-                  type="number"
-                  value={formData.tankSize}
-                  onChange={(e) => handleInputChange('tankSize', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[40px]">ltr</span>
-              </div>
-            </div>
+                <div>
+                  <Label htmlFor="tankSize" className="text-sm font-medium text-white">Dosing Tank Size(Volume) in Litre</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="tankSize"
+                      type="number"
+                      value={formData.tankSize}
+                      onChange={(e) => handleInputChange('tankSize', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">ltr</span>
+                  </div>
+                </div>
 
-            <div>
-              <Label htmlFor="pumpSetting" className="text-sm font-medium text-white">Dosing Pump Setting in %</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="pumpSetting"
-                  type="number"
-                  value={formData.pumpSetting}
-                  onChange={(e) => handleInputChange('pumpSetting', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[40px]">%</span>
+                <div>
+                  <Label htmlFor="pumpSetting" className="text-sm font-medium text-white">Dosing Pump Setting in %</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="pumpSetting"
+                      type="number"
+                      value={formData.pumpSetting}
+                      onChange={(e) => handleInputChange('pumpSetting', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">%</span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <Label htmlFor="runningHours" className="text-sm font-medium text-white">Plant Running Hour/Day</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="runningHours"
-                  type="number"
-                  value={formData.runningHours}
-                  onChange={(e) => handleInputChange('runningHours', e.target.value)}
-                  className="text-right bg-white text-red-600 font-semibold"
-                />
-                <span className="text-sm text-white min-w-[50px]">hr/day</span>
+              {/* Right Column - 7 fields */}
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="runningHours" className="text-sm font-medium text-white">Plant Running Hour/Day</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="runningHours"
+                      type="number"
+                      value={formData.runningHours}
+                      onChange={(e) => handleInputChange('runningHours', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[50px]">hr/day</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="waterPressure" className="text-sm font-medium text-white">Water Pressure</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="waterPressure"
+                      type="number"
+                      value={formData.waterPressure}
+                      onChange={(e) => handleInputChange('waterPressure', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">bar</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="membraneType" className="text-sm font-medium text-white">Membrane Type</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="membraneType"
+                      type="text"
+                      value={formData.membraneType}
+                      onChange={(e) => handleInputChange('membraneType', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">-</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="prefilterType" className="text-sm font-medium text-white">Pre-filter Type</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="prefilterType"
+                      type="text"
+                      value={formData.prefilterType}
+                      onChange={(e) => handleInputChange('prefilterType', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">-</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="postfilterType" className="text-sm font-medium text-white">Post-filter Type</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="postfilterType"
+                      type="text"
+                      value={formData.postfilterType}
+                      onChange={(e) => handleInputChange('postfilterType', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">-</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="systemAge" className="text-sm font-medium text-white">System Age</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="systemAge"
+                      type="number"
+                      value={formData.systemAge}
+                      onChange={(e) => handleInputChange('systemAge', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[50px]">years</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="maintenanceDate" className="text-sm font-medium text-white">Last Maintenance Date</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="maintenanceDate"
+                      type="date"
+                      value={formData.maintenanceDate}
+                      onChange={(e) => handleInputChange('maintenanceDate', e.target.value)}
+                      className="text-right bg-white text-red-600 font-semibold"
+                    />
+                    <span className="text-sm text-white min-w-[40px]">-</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <Button 
               onClick={calculateDosing}
               disabled={!validateForm()}
-              className="w-full bg-white/20 hover:bg-white/30 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 text-lg"
+              className="w-full bg-white/20 hover:bg-white/30 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 text-lg mt-6"
             >
               CALCULATE
             </Button>
